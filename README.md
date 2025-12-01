@@ -39,7 +39,7 @@ A community-maintained Discord bot for the Code Platoon Alumni server. The bot f
 ---
 
 ## 🗓️ Roadmap
-- [ ] Python project init + `discord.py` client
+- [x] Python project init + `discord.py` client
 - [ ] Slash command registration
 - [ ] Event announcement listeners
 - [ ] Monthly rundown job
@@ -53,6 +53,29 @@ A community-maintained Discord bot for the Code Platoon Alumni server. The bot f
 ## 🤝 Contributing
 **Contributors must be Code Platoon Alumni.** Please read **[CONTRIBUTING.md](CONTRIBUTING.md)** and **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** before contributing. Good first issues are labeled accordingly.
 
+### Getting Started
+
+**Prerequisites:** [Mise](https://mise.jdx.dev/getting-started.html) installed and functional.
+
+```bash
+# Install Python 3.12 + uv via mise
+mise install
+
+# Create and activate virtual environment
+uv venv
+source .venv/bin/activate      # macOS/Linux
+# .venv\Scripts\activate.bat   # Windows (cmd)
+# .venv\Scripts\Activate.ps1   # Windows (PowerShell)
+
+# Install dependencies in editable mode
+uv pip install -e .
+
+# Configure and run
+cp .env.example .env           # then add your DISCORD_TOKEN
+python -m bot
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed setup instructions.
 ---
 
 ## 🌍 License
