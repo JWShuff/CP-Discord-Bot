@@ -30,9 +30,6 @@ By participating in this project, you agree to abide by its terms.
 - Reference related issues in your PR description.
 - If you're assigned to an issue but can't complete it, please comment to let maintainers know so it can be reassigned.
 
-## Development (no-code phase)
-- This repo is in **planning mode**. Use issues to propose the initial Python scaffold (`discord.py`, `apscheduler`) and stateless audit flow.
-
 ---
 
 ## 📋 Issue Assignment Process
@@ -54,8 +51,8 @@ By participating in this project, you agree to abide by its terms.
 
 ---
 
-## 🧱 Suggested Tech Stack (Python)
-- **Language:** Python 3.11+
+## 🧱 Tech Stack
+- **Language:** Python 3.12
 - **Discord SDK:** `discord.py` (2.x)
 - **Scheduler:** `apscheduler` (for cron-like jobs)
 - **Persistence:** None (stateless audits based on join date)
@@ -67,7 +64,7 @@ By participating in this project, you agree to abide by its terms.
 
 ---
 
-## 🧭 Repo Layout (planned)
+## 🧭 Repo Layout
 ```
 / (root)
   ├─ .github/
@@ -77,11 +74,20 @@ By participating in this project, you agree to abide by its terms.
   │   │   ├─ feature_request.yml
   │   │   └─ task.yml
   │   └─ workflows/
-  │   │   ├─ project-issues.yml
-  │   │   ├─ project-prs.yml
+  │       ├─ project-issues.yml
+  │       ├─ project-prs.yml
   │       └─ ci.yml (to be added)
-  ├─ bot/ (to be added)
+  ├─ src/
+  │   └─ bot/
+  │       ├─ __init__.py
+  │       ├─ __main__.py    # Entry point
+  │       ├─ app.py         # Discord client
+  │       └─ config.py      # Environment loading
+  ├─ tests/                 # (to be added)
   ├─ .env.example
+  ├─ pyproject.toml
+  ├─ requirements.txt
+  ├─ mise.toml
   ├─ CONTRIBUTING.md
   ├─ CODE_OF_CONDUCT.md
   ├─ SECURITY.md
@@ -92,11 +98,64 @@ By participating in this project, you agree to abide by its terms.
 
 ---
 
-## 🚀 Getting Started (stub)
-1. **Prereqs:** Python 3.11+, pip, virtualenv.
-2. **Create bot** in Discord Developer Portal → enable SERVER MEMBERS intent.
-3. Create `.env` from [`.env.example`](.env.example):
-4. Install deps: `pip install -r requirements.txt`
+## 🚀 Getting Started
+
+> **Note:** This project is designed to work on both Windows and macOS/Linux. Commands are provided for both where they differ.
+
+### Prerequisites
+
+| Tool | Purpose | Install |
+|------|---------|---------|
+| [Mise](https://mise.jdx.dev/getting-started.html) | Manages Python version + uv automatically | See mise docs |
+| Git | Version control | You probably have this |
+
+> **Why mise + uv?** Mise ensures everyone uses the same Python version (3.12) without "works on my machine" issues. 
+
+> UV is a fast, modern pip replacement. Both are defined in `mise.toml` so contributors don't need to manually install uv - `mise install` handles it.
+
+### First-Time Setup
+
+**1. Fork and clone the repo**
+
+**2. Install toolchain (Python 3.12 + uv)**
+```bash
+mise install
+```
+
+**3. Create virtual environment**
+```bash
+uv venv
+```
+
+**4. Activate the virtual environment**
+
+| OS | Command |
+|----|---------|
+| Windows (cmd) | `.venv\Scripts\activate.bat` |
+| Windows (PowerShell) | `.venv\Scripts\Activate.ps1` |
+| macOS / Linux | `source .venv/bin/activate` |
+
+**5. Install dependencies**
+```bash
+uv pip install -e .
+```
+This installs the project in editable mode using `pyproject.toml`, which includes all dependencies.
+
+**6. Configure environment**
+
+| OS | Command |
+|----|---------|
+| Windows (cmd) | `copy .env.example .env` |
+| Windows (PowerShell) | `Copy-Item .env.example .env` |
+| macOS / Linux | `cp .env.example .env` |
+
+Edit `.env` and add your `DISCORD_TOKEN`. See [Discord Developer Portal](https://discord.com/developers/applications) to create a bot.
+
+**7. Run it!**
+```bash
+python -m bot
+```
+You should see: `READY: YourBot#1234`
 
 ---
 
@@ -106,7 +165,7 @@ By participating in this project, you agree to abide by its terms.
 ---
 
 ## 🗓️ Roadmap
-- [ ] Python project init + `discord.py` client
+- [x] Python project init + `discord.py` client
 - [ ] Slash command registration
 - [ ] Event announcement listeners
 - [ ] Monthly rundown job
@@ -122,5 +181,3 @@ By participating in this project, you agree to abide by its terms.
 - Scope the bot token to least privileges.
 - Avoid storing DM contents.
 - Provide a `/privacy` command and a `PRIVACY.md`.
-
-
