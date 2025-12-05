@@ -8,7 +8,7 @@ Thanks for helping build the Code Platoon Alumni Discord Bot!
 
 ## 📜 Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).  
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project, you agree to abide by its terms.
 
 ---
@@ -83,17 +83,22 @@ By participating in this project, you agree to abide by its terms.
   │       ├─ __main__.py    # Entry point
   │       ├─ app.py         # Discord client
   │       └─ config.py      # Environment loading
-  ├─ tests/                 # (to be added)
+  ├─ tests/
+  │       ├─ __init__.py
+  │       ├─ test_app.py
+  │       └─ test_config.py
   ├─ .env.example
-  ├─ pyproject.toml
-  ├─ requirements.txt
-  ├─ mise.toml
-  ├─ CONTRIBUTING.md
+  ├─ .gitignore
+  ├─ .pre-commit-config.yaml
   ├─ CODE_OF_CONDUCT.md
-  ├─ SECURITY.md
-  ├─ PRIVACY.md
+  ├─ CONTRIBUTING.md
   ├─ LICENSE
-  └─ README.md
+  ├─ mise.toml
+  ├─ PRIVACY.md
+  ├─ pyproject.toml
+  ├─ README.md
+  ├─ requirements.txt
+  └─ SECURITY.md
 ```
 
 ---
@@ -109,9 +114,24 @@ By participating in this project, you agree to abide by its terms.
 | [Mise](https://mise.jdx.dev/getting-started.html) | Manages Python version + uv automatically | See mise docs |
 | Git | Version control | You probably have this |
 
-> **Why mise + uv?** Mise ensures everyone uses the same Python version (3.12) without "works on my machine" issues. 
+> **Why mise + uv?** Mise ensures everyone uses the same Python version (3.12) without "works on my machine" issues.
 
 > UV is a fast, modern pip replacement. Both are defined in `mise.toml` so contributors don't need to manually install uv - `mise install` handles it.
+
+Roughly you'll need to install mise, then activate it in your terminal of choice. The docs are a great reference if trouble is encountered.
+```bash
+brew install mise # Mac
+winget install jdx.mise # Powershell
+# Activate mise for your env:
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc # zsh
+# Or Powershell:
+$shimPath = "$env:USERPROFILE\AppData\Local\mise\shims"
+$currentPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+$newPath = $currentPath + ";" + $shimPath
+[Environment]::SetEnvironmentVariable('Path', $newPath, 'User')
+
+mise -v # -> Should see mise splash screen in terminal of choice.
+```
 
 ### First-Time Setup
 
@@ -120,26 +140,30 @@ By participating in this project, you agree to abide by its terms.
 **2. Install toolchain (Python 3.12 + uv)**
 ```bash
 mise install
-```
-
-**3. Create virtual environment**
-```bash
 uv venv
+uv pip install -e .
 ```
 
-**4. Activate the virtual environment**
-
+**3. Activate the virtual environment**
 | OS | Command |
 |----|---------|
 | Windows (cmd) | `.venv\Scripts\activate.bat` |
 | Windows (PowerShell) | `.venv\Scripts\Activate.ps1` |
 | macOS / Linux | `source .venv/bin/activate` |
+> Uv should handle this implicitly, but you might still need it. Check uv docs if issues arise.
 
-**5. Install dependencies**
+**4. Install dependencies**
 ```bash
-uv pip install -e .
+uv pip install -e . # Runner/deployed env can stop here
+uv pip install -e ".[dev]" # Brings in the dev deps, like pre-commit
+pre-commit install # Installs the hooks so they 'just work' :tm:
 ```
 This installs the project in editable mode using `pyproject.toml`, which includes all dependencies.
+
+**5. Copy Env File**
+```bash
+cp .env.example .env           # then add your DISCORD_TOKEN
+```
 
 **6. Configure environment**
 
@@ -171,7 +195,7 @@ You should see: `READY: YourBot#1234`
 - [ ] Monthly rundown job
 - [ ] Stateless name policy audit job
 - [ ] DM templates and kicking workflow
-- [ ] CI pipeline setup
+- [x] CI pipeline setup
 - [ ] Dockerfile and deploy docs
 
 ---
