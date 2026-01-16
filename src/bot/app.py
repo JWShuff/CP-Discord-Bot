@@ -5,13 +5,15 @@ import signal
 import sys
 
 import discord
+import discord.ext.commands as commands
 
 from bot.config import config
 
 # Minimal intents - only guilds, no privileged intents
 intents = discord.Intents(guilds=True)
 
-client = discord.Client(intents=intents)
+# client = discord.Client(intents=intents)
+client = commands.Bot(command_prefix="!", intents=intents)
 
 
 @client.event

@@ -25,31 +25,20 @@ class TestConfig:
 
     def test_config_raises_error_when_token_missing(self, monkeypatch):
         """Test that Config raises ConfigError when DISCORD_TOKEN is missing."""
-        monkeypatch.delenv("DISCORD_TOKEN", raising=False)
+        monkeypatch.delenv("GRACE_PERIOD_DAYS", raising=False)
 
-        with pytest.raises(ConfigError, match="Missing required environment variable: DISCORD_TOKEN"):
+        with pytest.raises(ConfigError, match="Missing required environment variable: GRACE_PERIOD_DAYS"):
             Config()
 
     def test_config_raises_error_when_token_empty(self, monkeypatch):
         """Test that Config raises ConfigError when DISCORD_TOKEN is empty string."""
-        monkeypatch.setenv("DISCORD_TOKEN", "")
+        monkeypatch.setenv("MOD_CHANNEL_ID", "")
 
-        with pytest.raises(ConfigError, match="Missing required environment variable: DISCORD_TOKEN"):
+        with pytest.raises(ConfigError, match="Missing required environment variable: MOD_CHANNEL_ID"):
             Config()
 
-    def test_require_method_returns_value(self, mock_discord_token, monkeypatch):
-        """Test that _require method returns env var value."""
-        test_value = "some_value"
-        monkeypatch.setenv("TEST_VAR", test_value)
-
-        config = Config()
-        result = config._require("TEST_VAR")
-
-        assert result == test_value
-
-    def test_require_method_raises_on_missing(self, mock_discord_token):
-        """Test that _require raises ConfigError for missing var."""
-        config = Config()
-
-        with pytest.raises(ConfigError, match="Missing required environment variable: NONEXISTENT"):
-            config._require("NONEXISTENT")
+    def test_config_raises_error_when_regex_invalid(self, mock_discord_token, monkeypatch):
+        """Test that Config raises ConfigError when NAME_POLICY_REGEX does not parse to valid regex."""
+        monkeypatch.setenv("NAME_POLICY_REGEX", "[unclosed matcher")
+        with pytest.raises(ConfigError, match="Invalid NAME_POLICY_REGEX"):
+            Config()

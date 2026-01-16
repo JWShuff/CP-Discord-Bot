@@ -11,8 +11,13 @@ repos:
     rev: v0.14.7
     hooks:
       - id: ruff-check
-        args: [ --fix ]
+        args: [ --fix, --verbose, --show-fixes ]
       - id: ruff-format
+        name: ruff-format (show diff)
+        args: [ --diff, --check ]
+      - id: ruff-format
+        name: ruff-format (apply fixes)
+        args: []
 #     Optional: Add pyright if you want type checking
 #  - repo: https://github.com/RobertCraigie/pyright-python
 #    rev: v1.1.350

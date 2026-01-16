@@ -53,10 +53,10 @@ By participating in this project, you agree to abide by its terms.
 
 ## 🧱 Tech Stack
 - **Language:** Python 3.12
-- **Discord SDK:** `discord.py` (2.x)
+- **Discord SDK:** `discord.py` (2.x) [Docs Here](https://discordpy.readthedocs.io/en/stable/intro.html)
 - **Scheduler:** `apscheduler` (for cron-like jobs)
 - **Persistence:** None (stateless audits based on join date)
-- **Hosting:** Railway / Render / Docker on VPS
+- **Hosting:** Pending (AWS? Digital Ocean? Options Abound.)
 - **Config:** `.env` + `python-dotenv`
 - **Logging:** `post to logging channel`
 - **Testing:** `pytest`
