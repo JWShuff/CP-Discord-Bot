@@ -8,7 +8,6 @@ import discord
 
 from bot.config import config
 
-
 # Minimal intents - only guilds, no privileged intents
 intents = discord.Intents(guilds=True)
 

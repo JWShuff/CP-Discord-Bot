@@ -45,7 +45,7 @@ A community-maintained Discord bot for the Code Platoon Alumni server. The bot f
 - [ ] Monthly rundown job
 - [ ] Stateless name policy audit job
 - [ ] DM templates and kicking workflow
-- [ ] CI pipeline setup
+- [x] CI pipeline setup
 - [ ] Dockerfile and deploy docs
 
 ---
@@ -87,7 +87,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 🔒 Privacy
 
-Our privacy policy and data handling practices are detailed in the [PRIVACY.md](PRIVACY.md) file.  
+Our privacy policy and data handling practices are detailed in the [PRIVACY.md](PRIVACY.md) file.
 This bot is designed to be stateless with minimal data collection.
 
 ---

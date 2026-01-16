@@ -4,7 +4,6 @@ import asyncio
 
 from bot.app import start
 
-
 if __name__ == "__main__":
     try:
         asyncio.run(start())
